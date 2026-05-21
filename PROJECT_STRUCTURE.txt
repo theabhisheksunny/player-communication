@@ -1,0 +1,34 @@
+player-communication/
+├── pom.xml                           # Maven build configuration
+├── README.md                         # Main documentation
+├── SETUP.md                          # Installation and setup guide
+├── TESTING.md                        # Testing and verification guide
+├── PROJECT_STRUCTURE.txt            # This file
+├── run-same-process.sh              # Script for requirement 5
+├── run-different-processes.sh       # Script for requirement 7
+├── compile-manual.sh                # Alternative compilation without Maven
+└── src/main/java/com/player/
+    ├── Message.java                 # Message data structure
+    ├── MessageHandler.java          # Message reception interface
+    ├── MessageSender.java           # Message sending abstraction
+    ├── Player.java                  # Core Player class
+    ├── InProcessMessageSender.java  # Same-process routing
+    ├── SocketMessageSender.java     # Inter-process sending
+    ├── SocketMessageReceiver.java   # Inter-process receiving
+    ├── SameProcessMain.java         # Entry point for requirement 5
+    └── DifferentProcessMain.java    # Entry point for requirement 7
+
+Key Design Patterns:
+- Strategy Pattern: MessageSender abstraction with two implementations
+- Observer Pattern: MessageHandler callback interface
+- Dependency Injection: Players receive MessageSender via constructor
+- Single Responsibility: Each class has one clear purpose
+
+Requirements Mapping:
+1. Create 2 players → Both Main classes create two Player instances
+2. Initiator sends first → Player1 sends "Hello" to start
+3. Concatenate + counter → Player.onMessageReceived() implementation
+4. Stop at 10 messages → While loop in Main classes
+5. Same process → SameProcessMain with InProcessMessageSender
+6. Document responsibilities → Javadoc on every class
+7. Different processes → DifferentProcessMain with Socket classes
