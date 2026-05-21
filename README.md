@@ -84,13 +84,15 @@ mvn exec:java -Dexec.mainClass="com.player.SameProcessMain"
 
 Terminal 1:
 ```bash
-java -cp target/player-communication-1.0-SNAPSHOT.jar com.player.DifferentProcessMain Player2 5002 Player1 5001
+/usr/bin/java -cp target/player-communication-1.0-SNAPSHOT.jar com.player.DifferentProcessMain Player2 5002 Player1 5001
 ```
 
 Terminal 2:
 ```bash
-java -cp target/player-communication-1.0-SNAPSHOT.jar com.player.DifferentProcessMain Player1 5001 Player2 5002 initiator
+/usr/bin/java -cp target/player-communication-1.0-SNAPSHOT.jar com.player.DifferentProcessMain Player1 5001 Player2 5002 initiator
 ```
+
+**Note:** If you get "Properties init: Could not determine current working directory" error, use `/usr/bin/java` instead of `java`.
 
 ## How It Works
 

@@ -2,6 +2,9 @@
 
 # Script to run players in the same Java process
 
+# Use absolute path to Java to avoid working directory issues
+JAVA_CMD=$(which java 2>/dev/null || echo "/usr/bin/java")
+
 echo "Building project..."
 mvn clean compile
 

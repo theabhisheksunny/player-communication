@@ -2,6 +2,9 @@
 
 # Script to run players in different Java processes
 
+# Use absolute path to Java to avoid working directory issues
+JAVA_CMD=$(which java 2>/dev/null || echo "/usr/bin/java")
+
 echo "Building project..."
 mvn clean package
 
@@ -19,7 +22,7 @@ fi
 
 echo ""
 echo "Starting Player2 (responder) in background..."
-java -cp "$JAR_FILE" com.player.DifferentProcessMain Player2 5002 Player1 5001 > player2.log 2>&1 &
+$JAVA_CMD -cp "$JAR_FILE" com.player.DifferentProcessMain Player2 5002 Player1 5001 > player2.log 2>&1 &
 PLAYER2_PID=$!
 echo "Player2 started with PID: $PLAYER2_PID"
 
@@ -27,7 +30,7 @@ sleep 2
 
 echo ""
 echo "Starting Player1 (initiator)..."
-java -cp "$JAR_FILE" com.player.DifferentProcessMain Player1 5001 Player2 5002 initiator
+$JAVA_CMD -cp "$JAR_FILE" com.player.DifferentProcessMain Player1 5001 Player2 5002 initiator
 
 echo ""
 echo "Player1 finished. Stopping Player2..."
