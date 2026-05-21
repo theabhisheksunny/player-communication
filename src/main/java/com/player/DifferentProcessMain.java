@@ -63,7 +63,17 @@ public class DifferentProcessMain {
             receiverThread.join(1000);
         } else {
             System.out.println("Waiting for messages...\n");
-            receiverThread.join();
+
+            while (player.getSentMessageCount() < MAX_MESSAGES) {
+                Thread.sleep(10);
+            }
+
+            System.out.println("\n=== Stop Condition Met ===");
+            System.out.println(playerId + " sent: " + player.getSentMessageCount() + " messages");
+            System.out.println("Terminating gracefully.");
+
+            receiver.stop();
+            receiverThread.join(1000);
         }
     }
 }
